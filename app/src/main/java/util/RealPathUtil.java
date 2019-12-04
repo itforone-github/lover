@@ -9,7 +9,8 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.support.v4.content.CursorLoader;
+
+import androidx.loader.content.CursorLoader;
 
 /*
  * 이건 Uri 경로에서 해당 파일의 실제 경로를 가져 오는 소스 입니다.

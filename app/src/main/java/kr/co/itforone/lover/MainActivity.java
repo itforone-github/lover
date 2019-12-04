@@ -12,10 +12,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -33,6 +30,17 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.io.File;
 
@@ -56,11 +64,32 @@ public class MainActivity extends AppCompatActivity {
 
     //refresh
     private SwipeRefreshLayout refreshLayout = null;
+    public String token="";
+    //토큰값 세팅
+    public void setToken(){
 
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+
+                            return;
+                        }
+                        // Get new Instance ID token
+                        webView.loadUrl("javascript:setToken('"+task.getResult().getToken()+"');");
+                    }
+
+                });
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         Intent spalshIntent = new Intent(MainActivity.this, SplashActivity.class);
         startActivity(spalshIntent);
 
@@ -164,7 +193,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void setLayout() {
         webView = (WebView) findViewById(R.id.webView);
+        Intent intent = getIntent();
         url = getString(R.string.url);
+        try{
+            if(!intent.getExtras().getString("goUrl").equals("")){
+                url =intent.getExtras().getString("goUrl");
+            }
+        }catch(Exception e){
+
+        }
+
         webView.loadUrl(url);
 
         WebSettings setting = webView.getSettings();//웹뷰 세팅용
@@ -500,6 +538,8 @@ public class MainActivity extends AppCompatActivity {
                     // 롤리팝 이상에서는 CookieManager의 flush를 하도록 변경됨.
                     CookieManager.getInstance().flush();
                 }
+                //토큰값 세팅하기
+                setToken();
 
                 refreshLayout.setRefreshing(false);
             }

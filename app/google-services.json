@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "748525500524",
+    "firebase_url": "https://dreamforone-e23df.firebaseio.com",
+    "project_id": "dreamforone-e23df",
+    "storage_bucket": "dreamforone-e23df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:748525500524:android:35779803c20c43105d4049",
+        "android_client_info": {
+          "package_name": "kr.co.itforone.lover"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "748525500524-srf4cvuf5bh32d8sgmng6k2hiiik1iud.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.co.itforone.lover",
+            "certificate_hash": "fa9657941484e644a70bbf4492602012dfcf85f2"
+          }
+        },
+        {
+          "client_id": "748525500524-9d73q1769i18tfke7c6bpbgd0p1eenlk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAitmbGicbzk3M1R4jje4Tet80BW3g_Q78"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "748525500524-9d73q1769i18tfke7c6bpbgd0p1eenlk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "748525500524-6n9ul8da5abg7oh11m8tj5f0so7d8705.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "co.kr.itforone.namoint2"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
