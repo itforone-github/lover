@@ -1,6 +1,7 @@
 package kr.co.itforone.lover;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.content.DialogInterface;
@@ -41,6 +42,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.igaworks.v2.core.AdBrixRm;
 
 import java.io.File;
 
@@ -98,7 +100,8 @@ public class MainActivity extends AppCompatActivity {
             //noinspection deprecation
             CookieSyncManager.createInstance(this);
         }
-
+        // 이벤트 업로드 주기 설정 : 누적 이벤트가 10건일 때, AdBrix 서버로 이벤트 업로드
+        AdBrixRm.setEventUploadCountInterval(AdBrixRm.AdBrixEventUploadCountInterval.MIN);
         setLayout();
     }
 
@@ -134,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // input file 클릭시 호출함수
+    @TargetApi(Build.VERSION_CODES.ECLAIR_MR1)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
